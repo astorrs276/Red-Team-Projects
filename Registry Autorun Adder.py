@@ -4,7 +4,7 @@ import os
 def add_to_startup():
     key = r"SOFTWARE\Microsoft\Windows\CurrentVersion\Run"
     value_name = "OpenTesterFile"
-    file_path = r"notepad.exe C:\Users\CatGa\Downloads\tester.txt"  # Opens a file with Notepad - can run any exeecutable (I think)
+    file_path = r"notepad.exe C:\Users\CatGa\Downloads\tester.txt"  # Opens a file with Notepad - can run any executable (I think)
     
     try:
         with reg.OpenKey(reg.HKEY_CURRENT_USER, key, 0, reg.KEY_SET_VALUE) as reg_key:
