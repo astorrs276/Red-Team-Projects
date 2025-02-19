@@ -1,6 +1,12 @@
 import winreg as reg
 import os
-import create_file
+
+def create_file():
+    documents_path = os.path.join(os.path.expanduser("~"), "Documents")
+    file_path = os.path.join(documents_path, "prank.txt")
+    with open(file_path, "w") as file:
+        file.write("You've been pranked")
+    print(file_path)
 
 def add_to_startup():
     key1 = r"SOFTWARE\Microsoft\Windows\CurrentVersion\Run"
@@ -22,5 +28,5 @@ def add_to_startup():
         pass
 
 if __name__ == "__main__":
-    # create_file()
+    create_file()
     add_to_startup()
