@@ -19,6 +19,7 @@ def schedule_task():
         "schtasks", "/create", "/tn", task_name,
         "/tr", f'notepad.exe "{file_path}"',
         "/sc", interval, "/mo", repeat_interval,
+        # "/rl", "HIGHEST",  # Run with elevated privileges (only works if run as administrator)
         "/f"  # Force update if task already exists
     ]
 
