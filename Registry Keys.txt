@@ -1,0 +1,4 @@
+KEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run - GetPranked
+KEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\RunOnce - GetPranked
+
+HKEY_CURRENT_USER\Software\Microsoft\Command Processor - AutoRun
