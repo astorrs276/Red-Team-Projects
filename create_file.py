@@ -11,12 +11,12 @@ def create_text_file():
 
 
 def create_quick_cmd():
-    launcher_code = """
-import os
-os.system('start cmd /c exit')
-""" # Code within the created file
-    with open(os.path.join(DOCUMENTS_PATH, "quick_cmd.py"), "w") as file:
-        file.write(launcher_code)
+#     launcher_code = """
+# import os
+# os.system('start cmd /c exit')
+# """ # Code within the created file
+#     with open(os.path.join(DOCUMENTS_PATH, "quick_cmd.py"), "w") as file:
+#         file.write(launcher_code)
     os.system(f"python -m PyInstaller --onefile \"{os.path.join(DOCUMENTS_PATH, "quick_cmd.py")}\"") # Turns the created Python file into an executable
     # Moves the file to the documents folder
     dist_executable = Path("dist") / "quick_cmd.exe"
@@ -35,5 +35,5 @@ os.system('start cmd /c exit')
 
 
 if __name__ == "__main__":
-    create_text_file()
+    # create_text_file()
     create_quick_cmd()

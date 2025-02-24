@@ -91,8 +91,8 @@ def add_to_screensaver(): # Attempt to set a file to run when the screensaver ac
 
 if __name__ == "__main__":
     # Fully working
-    create_file()
-    add_to_startup()
+    # create_file()
+    # add_to_startup()
     add_to_cmd_start()
     # Only work with admin
     '''

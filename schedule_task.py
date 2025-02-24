@@ -16,7 +16,7 @@ def create_text_file():
 def create_quick_cmd():
     launcher_code = """
 import os
-os.system('start cmd /c exit')
+os.system('start cmd')
 """ # Code within the created file
     with open(os.path.join(DOCUMENTS_PATH, "quick_cmd.py"), "w") as file:
         file.write(launcher_code)
@@ -73,5 +73,5 @@ def schedule_task():
 
 if __name__ == "__main__":
     # create_text_file()
-    create_quick_cmd()
+    # create_quick_cmd()
     schedule_task()
