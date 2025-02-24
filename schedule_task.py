@@ -1,30 +1,34 @@
 import os
 import subprocess
 
+FILE_PATH = os.path.join(os.path.join(os.path.expanduser("~"), "Documents"), "prank.txt")
+RUN_PATH = r"notepad.exe " + FILE_PATH
+TASK_NAME = "GetPranked"
+
 def create_file():
-    documents_path = os.path.join(os.path.expanduser("~"), "Documents")
-    file_path = os.path.join(documents_path, "prank.txt")
-    with open(file_path, "w") as file:
+    with open(FILE_PATH, "w") as file:
         file.write("You've been pranked")
-    print(file_path)
+    # print(FILE_PATH)
 
 def schedule_task():
-    task_name = "OpenPrankFile"
-    documents_path = os.path.join(os.path.expanduser("~"), "Documents")
-    file_path = os.path.join(documents_path, "prank.txt")
     interval = "MINUTE"
-    repeat_interval = "10"
+    repeat_interval = "1"
 
     command = [
-        "schtasks", "/create", "/tn", task_name,
-        "/tr", f'notepad.exe "{file_path}"',
+        "schtasks", "/create", "/tn", TASK_NAME,
+        "/tr", f'notepad.exe "{FILE_PATH}"',
         "/sc", interval, "/mo", repeat_interval,
         # "/rl", "HIGHEST",  # Run with elevated privileges (only works if run as administrator)
         "/f"  # Force update if task already exists
     ]
 
+    run_command = [
+        "schtasks", "/run", "/tn", TASK_NAME
+    ]
+
     try:
         subprocess.run(command, check=True, shell=True)
+        subprocess.run(run_command, check=True, shell=True)
     except subprocess.CalledProcessError as e:
         pass
 
