@@ -49,8 +49,9 @@ def set_scancode_map(remap_dict):
 
 if __name__ == "__main__":
     remap_dict = {
-        "LEFT_CTRL":"LEFT_SHIFT",
         "LEFT_SHIFT":"LEFT_CTRL",
+        "LEFT_CTRL":"LEFT_ALT",
+        "LEFT_ALT":"LEFT_SHIFT",
         "LEFT_ARROW":"RIGHT_ARROW",
         "RIGHT_ARROW":"LEFT_ARROW",
         "UP_ARROW":"DOWN_ARROW",

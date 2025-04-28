@@ -1,7 +1,5 @@
 import os
 import subprocess
-import shutil
-from pathlib import Path
 
 DOCUMENTS_PATH = os.path.join(os.path.expanduser("~"), "Documents")
 TEXT_FILE_PATH = os.path.join(DOCUMENTS_PATH, "prank.txt")
