@@ -282,4 +282,16 @@ $=::{
 $+=::{
     Send "+={Left}"
 }
+$Left::{
+    Send "{Right}"
+}
+$Right::{
+    Send "{Left}"
+}
+$Up::{
+    Send "{Down}"
+}
+$Down::{
+    Send "{Up}"
+}
 ^Esc::ExitApp
