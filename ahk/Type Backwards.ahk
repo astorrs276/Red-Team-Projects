@@ -282,6 +282,9 @@ $=::{
 $+=::{
     Send "+={Left}"
 }
+$Space::{
+    Send "{Space}{Left}"
+}
 $Left::{
     Send "{Right}"
 }
