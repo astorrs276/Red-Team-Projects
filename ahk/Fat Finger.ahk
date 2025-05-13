@@ -1,10 +1,38 @@
 ﻿#SingleInstance Force
 
-odds := 10
+global odds1 := 1
+global odds2 := 10
+
+konami(char) {
+	static current := 0
+	if (char = "Up" && current = 0) {
+		current := 1
+	} else if (char = "Up" && current = 1) {
+		current := 2
+	} else if (char = "Down" && current = 2) {
+		current := 3
+	} else if (char = "Down" && current = 3) {
+		current := 4
+	} else if (char = "Left" && current = 4) {
+		current := 5
+	} else if (char = "Right" && current = 5) {
+		current := 6
+	} else if (char = "Left" && current = 6) {
+		current := 7
+	} else if (char = "Right" && current = 7) {
+		current := 8
+	} else if (char = "b" && current = 8) {
+		current := 9
+	} else if (char = "a" && current = 9) {
+		ExitApp()
+	} else {
+		current := 0
+	}
+}
 
 $q::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 2)
 		if (rand2 = 1) {
 			Send "qw"
@@ -14,10 +42,11 @@ $q::{
 	} else {
 		Send "q"
 	}
+	konami("q")
 }
 $+q::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 2)
 		if (rand2 = 1) {
 			Send "+q+w"
@@ -27,10 +56,11 @@ $+q::{
 	} else {
 		Send "+q"
 	}
+	konami("q")
 }
 $w::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 4)
 		if (rand2 = 1) {
 			Send "wq"
@@ -44,10 +74,11 @@ $w::{
 	} else {
 		Send "w"
 	}
+	konami("w")
 }
 $+w::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 4)
 		if (rand2 = 1) {
 			Send "+w+q"
@@ -61,10 +92,11 @@ $+w::{
 	} else {
 		Send "+w"
 	}
+	konami("w")
 }
 $e::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 4)
 		if (rand2 = 1) {
 			Send "ew"
@@ -78,10 +110,11 @@ $e::{
 	} else {
 		Send "e"
 	}
+	konami("e")
 }
 $+e::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 4)
 		if (rand2 = 1) {
 			Send "+e+w"
@@ -95,10 +128,11 @@ $+e::{
 	} else {
 		Send "+e"
 	}
+	konami("e")
 }
 $r::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 4)
 		if (rand2 = 1) {
 			Send "re"
@@ -112,10 +146,11 @@ $r::{
 	} else {
 		Send "r"
 	}
+	konami("r")
 }
 $+r::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 4)
 		if (rand2 = 1) {
 			Send "+r+e"
@@ -129,10 +164,11 @@ $+r::{
 	} else {
 		Send "+r"
 	}
+	konami("r")
 }
 $t::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 4)
 		if (rand2 = 1) {
 			Send "tr"
@@ -146,10 +182,11 @@ $t::{
 	} else {
 		Send "t"
 	}
+	konami("t")
 }
 $+t::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 4)
 		if (rand2 = 1) {
 			Send "+t+r"
@@ -163,10 +200,11 @@ $+t::{
 	} else {
 		Send "+t"
 	}
+	konami("t")
 }
 $y::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 4)
 		if (rand2 = 1) {
 			Send "yt"
@@ -180,10 +218,11 @@ $y::{
 	} else {
 		Send "y"
 	}
+	konami("y")
 }
 $+y::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 4)
 		if (rand2 = 1) {
 			Send "+y+t"
@@ -197,10 +236,11 @@ $+y::{
 	} else {
 		Send "+y"
 	}
+	konami("y")
 }
 $u::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 4)
 		if (rand2 = 1) {
 			Send "uy"
@@ -214,10 +254,11 @@ $u::{
 	} else {
 		Send "u"
 	}
+	konami("u")
 }
 $+u::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 4)
 		if (rand2 = 1) {
 			Send "+u+y"
@@ -231,10 +272,11 @@ $+u::{
 	} else {
 		Send "+u"
 	}
+	konami("u")
 }
 $i::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 4)
 		if (rand2 = 1) {
 			Send "iu"
@@ -248,10 +290,11 @@ $i::{
 	} else {
 		Send "i"
 	}
+	konami("i")
 }
 $+i::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 4)
 		if (rand2 = 1) {
 			Send "+i+u"
@@ -265,10 +308,11 @@ $+i::{
 	} else {
 		Send "+i"
 	}
+	konami("i")
 }
 $o::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 4)
 		if (rand2 = 1) {
 			Send "oi"
@@ -282,10 +326,11 @@ $o::{
 	} else {
 		Send "o"
 	}
+	konami("o")
 }
 $+o::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 4)
 		if (rand2 = 1) {
 			Send "+o+i"
@@ -299,10 +344,11 @@ $+o::{
 	} else {
 		Send "+o"
 	}
+	konami("o")
 }
 $p::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 2)
 		if (rand2 = 1) {
 			Send "po"
@@ -312,10 +358,11 @@ $p::{
 	} else {
 		Send "p"
 	}
+	konami("p")
 }
 $+p::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 2)
 		if (rand2 = 1) {
 			Send "+p+o"
@@ -325,10 +372,11 @@ $+p::{
 	} else {
 		Send "+p"
 	}
+	konami("p")
 }
 $a::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 4)
 		if (rand2 = 1) {
 			Send "aq"
@@ -342,10 +390,11 @@ $a::{
 	} else {
 		Send "a"
 	}
+	konami("a")
 }
 $+a::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 4)
 		if (rand2 = 1) {
 			Send "+a+q"
@@ -359,10 +408,11 @@ $+a::{
 	} else {
 		Send "+a"
 	}
+	konami("a")
 }
 $s::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 6)
 		if (rand2 = 1) {
 			Send "sa"
@@ -380,10 +430,11 @@ $s::{
 	} else {
 		Send "s"
 	}
+	konami("s")
 }
 $+s::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 6)
 		if (rand2 = 1) {
 			Send "+s+a"
@@ -401,10 +452,11 @@ $+s::{
 	} else {
 		Send "+s"
 	}
+	konami("s")
 }
 $d::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 6)
 		if (rand2 = 1) {
 			Send "ds"
@@ -422,10 +474,11 @@ $d::{
 	} else {
 		Send "d"
 	}
+	konami("d")
 }
 $+d::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 6)
 		if (rand2 = 1) {
 			Send "+d+s"
@@ -443,10 +496,11 @@ $+d::{
 	} else {
 		Send "+d"
 	}
+	konami("d")
 }
 $f::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 6)
 		if (rand2 = 1) {
 			Send "fd"
@@ -464,10 +518,11 @@ $f::{
 	} else {
 		Send "f"
 	}
+	konami("f")
 }
 $+f::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 6)
 		if (rand2 = 1) {
 			Send "+f+d"
@@ -485,10 +540,11 @@ $+f::{
 	} else {
 		Send "+f"
 	}
+	konami("f")
 }
 $g::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 6)
 		if (rand2 = 1) {
 			Send "gf"
@@ -506,10 +562,11 @@ $g::{
 	} else {
 		Send "g"
 	}
+	konami("g")
 }
 $+g::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 6)
 		if (rand2 = 1) {
 			Send "+g+f"
@@ -527,10 +584,11 @@ $+g::{
 	} else {
 		Send "+g"
 	}
+	konami("g")
 }
 $h::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 6)
 		if (rand2 = 1) {
 			Send "hg"
@@ -548,10 +606,11 @@ $h::{
 	} else {
 		Send "h"
 	}
+	konami("h")
 }
 $+h::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 6)
 		if (rand2 = 1) {
 			Send "+h+g"
@@ -569,10 +628,11 @@ $+h::{
 	} else {
 		Send "+h"
 	}
+	konami("h")
 }
 $j::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 6)
 		if (rand2 = 1) {
 			Send "jh"
@@ -590,10 +650,11 @@ $j::{
 	} else {
 		Send "j"
 	}
+	konami("j")
 }
 $+j::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 6)
 		if (rand2 = 1) {
 			Send "+j+h"
@@ -611,10 +672,11 @@ $+j::{
 	} else {
 		Send "+j"
 	}
+	konami("j")
 }
 $k::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 5)
 		if (rand2 = 1) {
 			Send "kj"
@@ -630,10 +692,11 @@ $k::{
 	} else {
 		Send "k"
 	}
+	konami("k")
 }
 $+k::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 5)
 		if (rand2 = 1) {
 			Send "+k+j"
@@ -649,10 +712,11 @@ $+k::{
 	} else {
 		Send "+k"
 	}
+	konami("k")
 }
 $l::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 3)
 		if (rand2 = 1) {
 			Send "lk"
@@ -664,10 +728,11 @@ $l::{
 	} else {
 		Send "l"
 	}
+	konami("l")
 }
 $+l::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 3)
 		if (rand2 = 1) {
 			Send "+l+k"
@@ -679,10 +744,11 @@ $+l::{
 	} else {
 		Send "+l"
 	}
+	konami("l")
 }
 $z::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 3)
 		if (rand2 = 1) {
 			Send "za"
@@ -694,10 +760,11 @@ $z::{
 	} else {
 		Send "z"
 	}
+	konami("z")
 }
 $+z::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 3)
 		if (rand2 = 1) {
 			Send "+z+a"
@@ -709,10 +776,11 @@ $+z::{
 	} else {
 		Send "+z"
 	}
+	konami("z")
 }
 $x::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 4)
 		if (rand2 = 1) {
 			Send "xz"
@@ -726,10 +794,11 @@ $x::{
 	} else {
 		Send "x"
 	}
+	konami("x")
 }
 $+x::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 4)
 		if (rand2 = 1) {
 			Send "+x+z"
@@ -743,10 +812,11 @@ $+x::{
 	} else {
 		Send "+x"
 	}
+	konami("x")
 }
 $c::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 4)
 		if (rand2 = 1) {
 			Send "cx"
@@ -760,10 +830,11 @@ $c::{
 	} else {
 		Send "c"
 	}
+	konami("c")
 }
 $+c::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 4)
 		if (rand2 = 1) {
 			Send "+c+x"
@@ -777,10 +848,11 @@ $+c::{
 	} else {
 		Send "+c"
 	}
+	konami("c")
 }
 $v::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 4)
 		if (rand2 = 1) {
 			Send "vc"
@@ -794,10 +866,11 @@ $v::{
 	} else {
 		Send "v"
 	}
+	konami("v")
 }
 $+v::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 4)
 		if (rand2 = 1) {
 			Send "+v+c"
@@ -811,10 +884,11 @@ $+v::{
 	} else {
 		Send "+v"
 	}
+	konami("v")
 }
 $b::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 4)
 		if (rand2 = 1) {
 			Send "bv"
@@ -828,10 +902,11 @@ $b::{
 	} else {
 		Send "b"
 	}
+	konami("b")
 }
 $+b::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 4)
 		if (rand2 = 1) {
 			Send "+b+v"
@@ -845,10 +920,11 @@ $+b::{
 	} else {
 		Send "+b"
 	}
+	konami("b")
 }
 $n::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 4)
 		if (rand2 = 1) {
 			Send "nb"
@@ -862,10 +938,11 @@ $n::{
 	} else {
 		Send "n"
 	}
+	konami("n")
 }
 $+n::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 4)
 		if (rand2 = 1) {
 			Send "+n+b"
@@ -879,10 +956,11 @@ $+n::{
 	} else {
 		Send "+n"
 	}
+	konami("n")
 }
 $m::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 3)
 		if (rand2 = 1) {
 			Send "mn"
@@ -894,10 +972,11 @@ $m::{
 	} else {
 		Send "m"
 	}
+	konami("m")
 }
 $+m::{
-	rand := Random(1, odds)
-	if (rand = 1) {
+	rand := Random(1, odds2)
+	if (rand <= odds1) {
 		rand2 := Random(1, 3)
 		if (rand2 = 1) {
 			Send "+m+n"
@@ -909,5 +988,21 @@ $+m::{
 	} else {
 		Send "+m"
 	}
+	konami("m")
 }
-^Esc::ExitApp
+$Up::{
+	Send "{Up}"
+	konami("Up")
+}
+$Down::{
+	Send "{Down}"
+	konami("Down")
+}
+$Left::{
+	Send "{Left}"
+	konami("Left")
+}
+$Right::{
+	Send "{Right}"
+	konami("Right")
+}

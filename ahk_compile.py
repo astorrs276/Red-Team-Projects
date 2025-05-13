@@ -1,5 +1,5 @@
 # Fat Fingering Compiler
-'''
+"""
 neighbors = {
     'q': ['w', 'a'],
     'w': ['q', 'a', 's', 'e'],
@@ -31,11 +31,43 @@ neighbors = {
     'm': ['n', 'j', 'k']
 }
 
-result = "#SingleInstance Force\n\nodds := 10\n\n"
+result = '''#SingleInstance Force
+
+global odds1 := 1
+global odds2 := 10
+
+konami(char) {
+	static current := 0
+	if (char = "Up" && current = 0) {
+		current := 1
+	} else if (char = "Up" && current = 1) {
+		current := 2
+	} else if (char = "Down" && current = 2) {
+		current := 3
+	} else if (char = "Down" && current = 3) {
+		current := 4
+	} else if (char = "Left" && current = 4) {
+		current := 5
+	} else if (char = "Right" && current = 5) {
+		current := 6
+	} else if (char = "Left" && current = 6) {
+		current := 7
+	} else if (char = "Right" && current = 7) {
+		current := 8
+	} else if (char = "b" && current = 8) {
+		current := 9
+	} else if (char = "a" && current = 9) {
+		ExitApp()
+	} else {
+		current := 0
+	}
+}
+
+'''
 
 for key in neighbors:
     adjacent = neighbors[key]
-    result += "$" + key + '::{\n\trand := Random(1, odds)\n\tif (rand = 1) {\n\t\t'
+    result += "$" + key + '::{\n\trand := Random(1, odds2)\n\tif (rand <= odds1) {\n\t\t'
     result += 'rand2 := Random(1, ' + str(len(adjacent)) + ")\n\t\t"
     first = True
     for i in range(len(adjacent)):
@@ -45,9 +77,10 @@ for key in neighbors:
             first = False
         result += 'if (rand2 = ' + str(i + 1) + ') {\n\t\t\tSend "' + key + adjacent[i] + '"\n\t\t}'
     result += '\n\t} else {\n\t\tSend "' + key + '"\n\t}'
+    result += '\n\tkonami("' + key + '")'
     result += '\n}\n'
 
-    result += "$+" + key + '::{\n\trand := Random(1, odds)\n\tif (rand = 1) {\n\t\t'
+    result += "$+" + key + '::{\n\trand := Random(1, odds2)\n\tif (rand <= odds1) {\n\t\t'
     result += 'rand2 := Random(1, ' + str(len(adjacent)) + ")\n\t\t"
     first = True
     for i in range(len(adjacent)):
@@ -57,18 +90,176 @@ for key in neighbors:
             first = False
         result += 'if (rand2 = ' + str(i + 1) + ') {\n\t\t\tSend "+' + key + "+" + adjacent[i] + '"\n\t\t}'
     result += '\n\t} else {\n\t\tSend "+' + key + '"\n\t}'
+    result += '\n\tkonami("' + key + '")'
     result += '\n}\n'
 
-with open("output.txt", "w") as file:
-    file.write(result + "^Esc::ExitApp")
+result += '''$Up::{
+	Send "{Up}"
+	konami("Up")
+}
+$Down::{
+	Send "{Down}"
+	konami("Down")
+}
+$Left::{
+	Send "{Left}"
+	konami("Left")
+}
+$Right::{
+	Send "{Right}"
+	konami("Right")
+}
 '''
 
+with open("output.txt", "w") as file:
+    file.write(result + "^Esc::ExitApp\n")
+"""
 
+
+
+
+# Shift Keyboard Right One Compiler
+"""
+letters = [
+    'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p',
+    'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l',
+    'z', 'x', 'c', 'v', 'b', 'n', 'm',
+]
+letters2 = [
+    'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'q',
+    's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'a',
+    'x', 'c', 'v', 'b', 'n', 'm', 'z',
+]
+
+result = '''#SingleInstance Force
+
+konami(char) {
+	static current := 0
+	if (char = "Up" && current = 0) {
+		current := 1
+	} else if (char = "Up" && current = 1) {
+		current := 2
+	} else if (char = "Down" && current = 2) {
+		current := 3
+	} else if (char = "Down" && current = 3) {
+		current := 4
+	} else if (char = "Left" && current = 4) {
+		current := 5
+	} else if (char = "Right" && current = 5) {
+		current := 6
+	} else if (char = "Left" && current = 6) {
+		current := 7
+	} else if (char = "Right" && current = 7) {
+		current := 8
+	} else if (char = "b" && current = 8) {
+		current := 9
+	} else if (char = "a" && current = 9) {
+		ExitApp()
+	} else {
+		current := 0
+	}
+}
+
+'''
+
+for i in range(len(letters)):
+    result += '$' + letters[i] + '''::{
+    Send "''' + letters2[i] + '''"
+    konami("''' + letters[i] + '''")
+}
+'''
+
+with open("output.txt", "w") as file:
+    file.write(result + "^Esc::ExitApp\n")
+"""
+
+
+
+
+# Type Backwards Compiler
+"""
+letters = [
+    'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p',
+    'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l',
+    'z', 'x', 'c', 'v', 'b', 'n', 'm',
+    '1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
+    '-', '=', '[', ']', '\\', ';', "'", ',', '.', '/',
+]
+
+result = '''#SingleInstance Force
+
+konami(char) {
+	static current := 0
+	if (char = "Up" && current = 0) {
+		current := 1
+	} else if (char = "Up" && current = 1) {
+		current := 2
+	} else if (char = "Down" && current = 2) {
+		current := 3
+	} else if (char = "Down" && current = 3) {
+		current := 4
+	} else if (char = "Left" && current = 4) {
+		current := 5
+	} else if (char = "Right" && current = 5) {
+		current := 6
+	} else if (char = "Left" && current = 6) {
+		current := 7
+	} else if (char = "Right" && current = 7) {
+		current := 8
+	} else if (char = "b" && current = 8) {
+		current := 9
+	} else if (char = "a" && current = 9) {
+		ExitApp()
+	} else {
+		current := 0
+	}
+}
+
+'''
+
+for i in range(len(letters)):
+    result += '$' + letters[i] + '''::{
+    Send "''' + letters[i] + '''{Left}"
+    konami("''' + letters[i] + '''")
+}
+'''
+    result += '$+' + letters[i] + '''::{
+    Send "+''' + letters[i] + '''{Left}"
+    konami("''' + letters[i] + '''")
+}
+'''
+
+result += '''Space::{
+    Send "{Space}"
+    konami("Space")
+}
+Up::{
+    Send "{Down}"
+    konami("Up")
+}
+Down::{
+    Send "{Up}"
+    konami("Down")
+}
+Left::{
+    Send "{Right}"
+    konami("Left")
+}
+Right::{
+    Send "{Left}"
+    konami("Right")
+}
+'''
+
+with open("output.txt", "w") as file:
+    file.write(result + "^Esc::ExitApp\n")
+"""
 
 
 
 
 # Tool compiler
+"""
 letters = [
     'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p',
     'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l',
@@ -162,3 +353,4 @@ $'''
 
     with open("../Public-AHK/" + other + ".ahk", "w") as file:
         file.write(result)
+"""
