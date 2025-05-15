@@ -1,6 +1,6 @@
 @echo off
 
-set "destDir=C:\microsoft"
+set "destDir=C:\Microsoft"
 
 if not exist "%destDir%" exit
 
