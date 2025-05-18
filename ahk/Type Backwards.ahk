@@ -396,7 +396,7 @@ $+/::{
     konami("/")
 }
 $Space::{
-    Send "{Space}"
+    Send "{Space}{Left}"
     konami("Space")
 }
 $Up::{
