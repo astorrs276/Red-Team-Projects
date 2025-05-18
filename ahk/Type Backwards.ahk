@@ -395,23 +395,23 @@ $+/::{
     Send "+/{Left}"
     konami("/")
 }
-Space::{
+$Space::{
     Send "{Space}"
     konami("Space")
 }
-Up::{
+$Up::{
     Send "{Down}"
     konami("Up")
 }
-Down::{
+$Down::{
     Send "{Up}"
     konami("Down")
 }
-Left::{
+$Left::{
     Send "{Right}"
     konami("Left")
 }
-Right::{
+$Right::{
     Send "{Left}"
     konami("Right")
 }
