@@ -442,19 +442,19 @@ konami(char) {
     konami("Space")
 }
 $Up::{
-    Send "{Down}"
+    Send "{Up}"
     konami("Up")
 }
 $Down::{
-    Send "{Up}"
+    Send "{Down}"
     konami("Down")
 }
 $Left::{
-    Send "{Right}"
+    Send "{Left}"
     konami("Left")
 }
 $Right::{
-    Send "{Left}"
+    Send "{Right}"
     konami("Right")
 }
 '''
