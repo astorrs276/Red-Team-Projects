@@ -1,7 +1,7 @@
 ﻿#SingleInstance Force
 
-global odds1 := 1
-global odds2 := 10
+global odds1 := 1   ; value that random must be less than or equal to
+global odds2 := 10  ; max value for random
 
 konami(char) {
 	static current := 0
