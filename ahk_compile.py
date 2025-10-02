@@ -1,4 +1,3 @@
-# Fat Fingering Compiler
 def fat_fingering():
     neighbors = {
         'q': ['w', 'a'],
@@ -33,37 +32,37 @@ def fat_fingering():
 
     result = '''#SingleInstance Force
 
-    global odds1 := 1
-    global odds2 := 10
+global odds1 := 1
+global odds2 := 10
 
-    konami(char) {
-        static current := 0
-        if (char = "Up" && current = 0) {
-            current := 1
-        } else if (char = "Up" && current = 1) {
-            current := 2
-        } else if (char = "Down" && current = 2) {
-            current := 3
-        } else if (char = "Down" && current = 3) {
-            current := 4
-        } else if (char = "Left" && current = 4) {
-            current := 5
-        } else if (char = "Right" && current = 5) {
-            current := 6
-        } else if (char = "Left" && current = 6) {
-            current := 7
-        } else if (char = "Right" && current = 7) {
-            current := 8
-        } else if (char = "b" && current = 8) {
-            current := 9
-        } else if (char = "a" && current = 9) {
-            ExitApp()
-        } else {
-            current := 0
-        }
+konami(char) {
+    static current := 0
+    if (char = "Up" && current = 0) {
+        current := 1
+    } else if (char = "Up" && current = 1) {
+        current := 2
+    } else if (char = "Down" && current = 2) {
+        current := 3
+    } else if (char = "Down" && current = 3) {
+        current := 4
+    } else if (char = "Left" && current = 4) {
+        current := 5
+    } else if (char = "Right" && current = 5) {
+        current := 6
+    } else if (char = "Left" && current = 6) {
+        current := 7
+    } else if (char = "Right" && current = 7) {
+        current := 8
+    } else if (char = "b" && current = 8) {
+        current := 9
+    } else if (char = "a" && current = 9) {
+        ExitApp()
+    } else {
+        current := 0
     }
+}
 
-    '''
+'''
 
     for key in neighbors:
         adjacent = neighbors[key]
@@ -94,22 +93,22 @@ def fat_fingering():
         result += '\n}\n'
 
     result += '''$Up::{
-        Send "{Up}"
-        konami("Up")
-    }
-    $Down::{
-        Send "{Down}"
-        konami("Down")
-    }
-    $Left::{
-        Send "{Left}"
-        konami("Left")
-    }
-    $Right::{
-        Send "{Right}"
-        konami("Right")
-    }
-    '''
+    Send "{Up}"
+    konami("Up")
+}
+$Down::{
+    Send "{Down}"
+    konami("Down")
+}
+$Left::{
+    Send "{Left}"
+    konami("Left")
+}
+$Right::{
+    Send "{Right}"
+    konami("Right")
+}
+'''
 
     with open("output.txt", "w") as file:
         file.write(result + "^Esc::ExitApp\n")
@@ -128,41 +127,41 @@ def shift_keyboard_right_one():
 
     result = '''#SingleInstance Force
 
-    konami(char) {
-        static current := 0
-        if (char = "Up" && current = 0) {
-            current := 1
-        } else if (char = "Up" && current = 1) {
-            current := 2
-        } else if (char = "Down" && current = 2) {
-            current := 3
-        } else if (char = "Down" && current = 3) {
-            current := 4
-        } else if (char = "Left" && current = 4) {
-            current := 5
-        } else if (char = "Right" && current = 5) {
-            current := 6
-        } else if (char = "Left" && current = 6) {
-            current := 7
-        } else if (char = "Right" && current = 7) {
-            current := 8
-        } else if (char = "b" && current = 8) {
-            current := 9
-        } else if (char = "a" && current = 9) {
-            ExitApp()
-        } else {
-            current := 0
-        }
+konami(char) {
+    static current := 0
+    if (char = "Up" && current = 0) {
+        current := 1
+    } else if (char = "Up" && current = 1) {
+        current := 2
+    } else if (char = "Down" && current = 2) {
+        current := 3
+    } else if (char = "Down" && current = 3) {
+        current := 4
+    } else if (char = "Left" && current = 4) {
+        current := 5
+    } else if (char = "Right" && current = 5) {
+        current := 6
+    } else if (char = "Left" && current = 6) {
+        current := 7
+    } else if (char = "Right" && current = 7) {
+        current := 8
+    } else if (char = "b" && current = 8) {
+        current := 9
+    } else if (char = "a" && current = 9) {
+        ExitApp()
+    } else {
+        current := 0
     }
+}
 
-    '''
+'''
 
     for i in range(len(letters)):
         result += '$' + letters[i] + '''::{
-        Send "''' + letters2[i] + '''"
-        konami("''' + letters[i] + '''")
-    }
-    '''
+    Send "''' + letters2[i] + '''"
+    konami("''' + letters[i] + '''")
+}
+'''
 
     with open("output.txt", "w") as file:
         file.write(result + "^Esc::ExitApp\n")
@@ -209,37 +208,37 @@ def type_backwards():
 
     for i in range(len(letters)):
         result += '$' + letters[i] + '''::{
-        Send "''' + letters[i] + '''{Left}"
-        konami("''' + letters[i] + '''")
-    }
-    '''
-        result += '$+' + letters[i] + '''::{
-        Send "+''' + letters[i] + '''{Left}"
-        konami("''' + letters[i] + '''")
-    }
-    '''
+    Send "''' + letters[i] + '''{Left}"
+    konami("''' + letters[i] + '''")
+}
+'''
+    result += '$+' + letters[i] + '''::{
+    Send "+''' + letters[i] + '''{Left}"
+    konami("''' + letters[i] + '''")
+}
+'''
 
     result += '''$Space::{
-        Send "{Space}"
-        konami("Space")
-    }
-    $Up::{
-        Send "{Down}"
-        konami("Up")
-    }
-    $Down::{
-        Send "{Up}"
-        konami("Down")
-    }
-    $Left::{
-        Send "{Right}"
-        konami("Left")
-    }
-    $Right::{
-        Send "{Left}"
-        konami("Right")
-    }
-    '''
+    Send "{Space}"
+    konami("Space")
+}
+$Up::{
+    Send "{Down}"
+    konami("Up")
+}
+$Down::{
+    Send "{Up}"
+    konami("Down")
+}
+$Left::{
+    Send "{Right}"
+    konami("Left")
+}
+$Right::{
+    Send "{Left}"
+    konami("Right")
+}
+'''
 
     with open("output.txt", "w") as file:
         file.write(result + "^Esc::ExitApp\n")
@@ -251,65 +250,214 @@ def autocorrect():
         'z', 'x', 'c', 'v', 'b', 'n', 'm',
     ]
 
+    changes = {
+        'angel_anal':'{Backspace 3}al',
+        'asf_sad':'{Backspace 3}sad',
+        'autocorrect_auto_corrupt':'{Backspace 7}{Space}corrupt',
+        'beach_bitch':'{Backspace 4}itch',
+        'beast_breast':'{Backspace 4}reast',
+        'bone_porn':'{Backspace 4}porn',
+        'book_boob':'{Backspace}b',
+        'cant_cunt':'{Backspace 3}unt',
+        'cars_cats':'{Backspace 2}ts',
+        'cats_cars':'{Backspace 2}rs',
+        'caulk_cock':'{Backspace 4}ock',
+        'cock_caulk':'{Backspace 3}aulk',
+        'confused_coming_used':'{Backspace 6}ming{Space}used',
+        'corn_porn':'{Backspace 4}porn',
+        'correct_erect':'{Backspace 7}erect',
+        'dice_dick':'{Backspace}k',
+        'diet_dirt':'{Backspace 2}rt',
+        'donut_dildo':'{Backspace 4}ildo',
+        'duck_fuck':'{Backspace 4}fuck',
+        'girl_gorilla':'{Backspace 3}orilla',
+        'going_galena':'{Backspace 4}alena',
+        'good_god':'{Backspace 2}d',
+        'hill_hell':'{Backspace 3}ell',
+        'honey_horny':'{Backspace 3}rny',
+        'i_k':'{Backspace}k',
+        'kick_kiss':'{Backspace 2}ss',
+        'lamp_lmao':'{Backspace 3}mao',
+        'live_libe':'{Backspace 2}be',
+        'lmao_lamp':'{Backspace 3}amp',
+        'organism_orgasm':'{Backspace 4}sm',
+        'peanut_penis':'{Backspace 4}nis',
+        'people_penis':'{Backspace 4}nis',
+        'pool_poo':'{Backspace}',
+        'pork_porn':'{Backspace}n',
+        'probably_peanut_uterus':'{Backspace 7}eanut{Space}uterus',
+        'public_pubic':'{Backspace 3}ic',
+        'puppies_pussies':'{Backspace 5}ssies',
+        'ready_dead':'{Backspace 5}dead',
+        'relaxing_slaving':'{Backspace 8}slaving',
+        'rit_tit':'{Backspace 3}tit',
+        'sec_sex':'{Backspace}x',
+        'shot_shit':'{Backspace 2}it',
+        'speak_sleep':'{Backspace 4}leep',
+        'sticky_stinky':'{Backspace 3}nky',
+        'terrible_testicle':'{Backspace 6}sticle',
+        'that_thar':'{Backspace}r',
+        'thing_thug':'{Backspace 3}ug',
+        'tub_rub':'{Backspace 3}rub',
+        'weird_wired':'{Backspace 4}ired',
+        'wired_weird':'{Backspace 4}eird',
+    }
+
     result = '''#SingleInstance Force
 
-    commands(char) {
-        static current := 0
-        if (char = "Up" && current = 0) {
-            current := 1
-        } else if (char = "Up" && current = 1) {
-            current := 2
-        } else if (char = "Down" && current = 2) {
-            current := 3
-        } else if (char = "Down" && current = 3) {
-            current := 4
-        } else if (char = "Left" && current = 4) {
-            current := 5
-        } else if (char = "Right" && current = 5) {
-            current := 6
-        } else if (char = "Left" && current = 6) {
-            current := 7
-        } else if (char = "Right" && current = 7) {
-            current := 8
-        } else if (char = "b" && current = 8) {
-            current := 9
-        } else if (char = "a" && current = 9) {
-            ExitApp()
-        } else {
-            current := 0
-        }
+commands(char) {
+    static konami := 0\n'''
+    for change in changes:
+        result += "    static " + change + " := 0\n"
+
+    result += '''
+    if (char = 'Space') {
+        konami := 0\n'''
+    for change in changes:
+        result += "        " + change + " := 0\n"
+
+    result += '''Return
     }
 
-    '''
+    if (char = "Up" && konami = 0) {
+        konami := 1
+    } else if (char = "Up" && konami = 1) {
+        konami := 2
+    } else if (char = "Down" && konami = 2) {
+        konami := 3
+    } else if (char = "Down" && konami = 3) {
+        konami := 4
+    } else if (char = "Left" && konami = 4) {
+        konami := 5
+    } else if (char = "Right" && konami = 5) {
+        konami := 6
+    } else if (char = "Left" && konami = 6) {
+        konami := 7
+    } else if (char = "Right" && konami = 7) {
+        konami := 8
+    } else if (char = "b" && konami = 8) {
+        konami := 9
+    } else if (char = "a" && konami = 9) {
+        ExitApp()
+    } else {
+        konami := 0
+    }
+'''
+    for change in changes:
+        result += '\n    if (' + change + ' != -1 && char = SubStr(\'' + change.split("_")[0] + '\', ' + change + ' + 1, 1)) {\n'
+        result += '        ' + change + ' += 1\n'
+        result += '        if (' + change + ' = StrLen(\'' + change.split("_")[0] + '\')) {\n'
+        result += '            ' + change + ' := -1\n'
+        result += '            Send \'' + changes[change] + '\'\n'
+        result += '        }\n'
+        result += '    } else if (char != SubStr(\'' + change.split("_")[0] + '\', ' + change + ' + 1, 1)) {\n'
+        result += '        ' + change + ' := -1\n'
+        result += '    }\n'
+    result += '''}
+
+'''
 
     for i in range(len(letters)):
-        result += '$' + letters[i] + '''::{
-        Send "''' + letters[i] + '''"
-        commands("''' + letters[i] + '''")
-    }
-    '''
+        result += '$' + letters[i] + """::{
+    Send '""" + letters[i] + """'
+    commands('""" + letters[i] + """')
+}
+"""
 
     result += '''$Space::{
-        Send "{Space}"
-        commands("Space")
+    Send '{Space}'
+    commands('Space')
+}
+$Up::{
+    Send '{Up}'
+    commands('Up')
+}
+$Down::{
+    Send '{Down}'
+    commands('Down')
+}
+$Left::{
+    Send '{Left}'
+    commands('Left')
+}
+$Right::{
+    Send '{Right}'
+    commands('Right')
+}
+'''
+
+    with open("output.txt", "w") as file:
+        file.write(result + "^Esc::ExitApp\n")
+
+def no_doubles():
+    letters = [
+        'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p',
+        'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l',
+        'z', 'x', 'c', 'v', 'b', 'n', 'm',
+    ]
+    result = '''#SingleInstance Force
+
+global previous := ""
+
+konami(char) {
+    static current := 0
+    if (char = "Up" && current = 0) {
+        current := 1
+    } else if (char = "Up" && current = 1) {
+        current := 2
+    } else if (char = "Down" && current = 2) {
+        current := 3
+    } else if (char = "Down" && current = 3) {
+        current := 4
+    } else if (char = "Left" && current = 4) {
+        current := 5
+    } else if (char = "Right" && current = 5) {
+        current := 6
+    } else if (char = "Left" && current = 6) {
+        current := 7
+    } else if (char = "Right" && current = 7) {
+        current := 8
+    } else if (char = "b" && current = 8) {
+        current := 9
+    } else if (char = "a" && current = 9) {
+        ExitApp()
+    } else {
+        current := 0
     }
-    $Up::{
-        Send "{Down}"
-        commands("Up")
+}
+
+'''
+    for letter in letters:
+        result += '$' + letter + '''::{
+    if (previous != "''' + letter + '''") {
+        Send "''' + letter + '''"
     }
-    $Down::{
-        Send "{Up}"
-        commands("Down")
-    }
-    $Left::{
-        Send "{Right}"
-        commands("Left")
-    }
-    $Right::{
-        Send "{Left}"
-        commands("Right")
-    }
-    '''
+    global previous := "''' + letter + '''"
+    konami("''' + letter + '''")
+}
+'''
+
+    result += '''$Space::{
+    Send "{Space}"
+    konami("Space")
+}
+$Up::{
+    Send "{Down}"
+    konami("Up")
+}
+$Down::{
+    Send "{Up}"
+    konami("Down")
+}
+$Left::{
+    Send "{Right}"
+    konami("Left")
+}
+$Right::{
+    Send "{Left}"
+    konami("Right")
+}
+'''
 
     with open("output.txt", "w") as file:
         file.write(result + "^Esc::ExitApp\n")
@@ -396,4 +544,10 @@ def tool():
             file.write(result)
 
 if __name__ == "__main__":
-    autocorrect()
+    # fat_fingering()
+    # shift_keyboard_right_one()
+    # type_backwards()
+    # autocorrect()
+    # no_doubles()
+    # tool()
+    pass
