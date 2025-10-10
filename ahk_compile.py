@@ -146,6 +146,7 @@ def persistent_fat_fingering():
     }
 
     result = '''#SingleInstance Force
+#NoTrayIcon
 
 global odds1 := 1
 global odds2 := 10
@@ -670,7 +671,7 @@ def tool():
 
 if __name__ == "__main__":
     # fat_fingering()
-    persistent_fat_fingering()
+    # persistent_fat_fingering()
     # shift_keyboard_right_one()
     # type_backwards()
     # autocorrect()

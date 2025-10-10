@@ -1,4 +1,5 @@
 #SingleInstance Force
+#NoTrayIcon
 
 global odds1 := 1
 global odds2 := 10
