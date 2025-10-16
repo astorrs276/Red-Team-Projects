@@ -110,7 +110,7 @@ $Right::{
 }
 '''
 
-    with open("output.txt", "w") as file:
+    with open("ahk\\Fat Finger.ahk", "w") as file:
         file.write(result + "^Esc::ExitApp\n")
 
 def persistent_fat_fingering():
@@ -237,7 +237,7 @@ $Right::{
 }
 '''
 
-    with open("output.txt", "w") as file:
+    with open("ahk\\Persistent Fat Finger.ahk", "w") as file:
         file.write(result + "^Esc::ExitApp\n")
 
 def shift_keyboard_right_one():
@@ -290,7 +290,7 @@ konami(char) {
 }
 '''
 
-    with open("output.txt", "w") as file:
+    with open("ahk\\Shift Keyboard Right One.ahk", "w") as file:
         file.write(result + "^Esc::ExitApp\n")
 
 def type_backwards():
@@ -367,7 +367,7 @@ $Right::{
 }
 '''
 
-    with open("output.txt", "w") as file:
+    with open("ahk\\Type Backwards.ahk", "w") as file:
         file.write(result + "^Esc::ExitApp\n")
 
 def autocorrect():
@@ -513,7 +513,7 @@ $Right::{
 }
 '''
 
-    with open("output.txt", "w") as file:
+    with open("ahk\\Autocorrect.ahk", "w") as file:
         file.write(result + "^Esc::ExitApp\n")
 
 def no_doubles():
@@ -586,7 +586,7 @@ $Right::{
 }
 '''
 
-    with open("output.txt", "w") as file:
+    with open("ahk\\No Doubles.ahk", "w") as file:
         file.write(result + "^Esc::ExitApp\n")
 
 def tool():
