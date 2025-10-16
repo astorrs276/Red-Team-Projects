@@ -26,6 +26,7 @@ konami(char) {
         current := 9
     } else if (char = "a" && current = 9) {
         MsgBox("Now why would I have left this in for a comp?")
+        MsgBox("But dm me 'konami's cool' on Discord (12pounce89) for a surprise")
     } else {
         current := 0
     }
