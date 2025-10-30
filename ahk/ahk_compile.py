@@ -710,7 +710,7 @@ def tool():
 
 if __name__ == "__main__":
     # fat_fingering()
-    persistent_fat_fingering()
+    # persistent_fat_fingering()
     # shift_keyboard_right_one()
     # type_backwards()
     # autocorrect()
