@@ -1,33 +1,33 @@
-﻿#SingleInstance Force
+#SingleInstance Force
 
-global odds1 := 1   ; value that random must be less than or equal to
-global odds2 := 10  ; max value for random
+global odds1 := 1
+global odds2 := 10
 
 konami(char) {
-	static current := 0
-	if (char = "Up" && current = 0) {
-		current := 1
-	} else if (char = "Up" && current = 1) {
-		current := 2
-	} else if (char = "Down" && current = 2) {
-		current := 3
-	} else if (char = "Down" && current = 3) {
-		current := 4
-	} else if (char = "Left" && current = 4) {
-		current := 5
-	} else if (char = "Right" && current = 5) {
-		current := 6
-	} else if (char = "Left" && current = 6) {
-		current := 7
-	} else if (char = "Right" && current = 7) {
-		current := 8
-	} else if (char = "b" && current = 8) {
-		current := 9
-	} else if (char = "a" && current = 9) {
-		ExitApp()
-	} else {
-		current := 0
-	}
+    static current := 0
+    if (char = "Up" && current = 0) {
+        current := 1
+    } else if (char = "Up" && current = 1) {
+        current := 2
+    } else if (char = "Down" && current = 2) {
+        current := 3
+    } else if (char = "Down" && current = 3) {
+        current := 4
+    } else if (char = "Left" && current = 4) {
+        current := 5
+    } else if (char = "Right" && current = 5) {
+        current := 6
+    } else if (char = "Left" && current = 6) {
+        current := 7
+    } else if (char = "Right" && current = 7) {
+        current := 8
+    } else if (char = "b" && current = 8) {
+        current := 9
+    } else if (char = "a" && current = 9) {
+        ExitApp()
+    } else {
+        current := 0
+    }
 }
 
 $q::{
@@ -991,18 +991,19 @@ $+m::{
 	konami("m")
 }
 $Up::{
-	Send "{Up}"
-	konami("Up")
+    Send "{Up}"
+    konami("Up")
 }
 $Down::{
-	Send "{Down}"
-	konami("Down")
+    Send "{Down}"
+    konami("Down")
 }
 $Left::{
-	Send "{Left}"
-	konami("Left")
+    Send "{Left}"
+    konami("Left")
 }
 $Right::{
-	Send "{Right}"
-	konami("Right")
+    Send "{Right}"
+    konami("Right")
 }
+^Esc::ExitApp

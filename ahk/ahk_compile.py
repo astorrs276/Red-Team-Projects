@@ -108,10 +108,11 @@ $Right::{
     Send "{Right}"
     konami("Right")
 }
+^Esc::ExitApp
 '''
 
     with open("ahk\\Fat Finger.ahk", "w") as file:
-        file.write(result + "^Esc::ExitApp\n")
+        file.write(result)
 
 def persistent_fat_fingering():
     neighbors = {
@@ -273,10 +274,17 @@ $RButton::{
     konami("RButton")
     debouncePersistent()
 }
+^Esc::{
+    if (odds1 = 0) {
+        global odds1 := 1
+    } else {
+        global odds1 := 0
+    }
+}
 '''
 
     with open("ahk\\Persistent Fat Finger.ahk", "w") as file:
-        file.write(result + "^Esc::ExitApp\n")
+        file.write(result)
 
 def shift_keyboard_right_one():
     letters = [

@@ -1106,4 +1106,10 @@ $RButton::{
     konami("RButton")
     debouncePersistent()
 }
-^Esc::ExitApp
+^Esc::{
+    if (odds1 = 0) {
+        global odds1 := 1
+    } else {
+        global odds1 := 0
+    }
+}
