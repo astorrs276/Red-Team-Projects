@@ -188,7 +188,7 @@ debouncePersistent() {
 
     ; Create timer that will call persistent() once after 1000ms
     _Timer := (*) => persistent()
-    SetTimer(_Timer, -7000) ; negative for one-shot
+    SetTimer(_Timer, -2000) ; negative for one-shot
 }
 
 persistent() {
